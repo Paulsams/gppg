@@ -227,6 +227,8 @@ namespace QUT.GPGen
             Console.WriteLine("using System.Collections.Generic;");
             Console.WriteLine("using System.CodeDom.Compiler;");
             Console.WriteLine("using System.Globalization;");
+            if (grammar.unionType != null)
+                Console.WriteLine("using System.Runtime.InteropServices;");
             Console.WriteLine("using System.Text;");
             Console.WriteLine("using QUT.Gppg;");
             foreach (string s in grammar.usingList)
@@ -293,7 +295,8 @@ namespace QUT.GPGen
                 if (grammar.ValueTypeName == null)
                     // we have a "union" type declared, but no type name declared.
                     grammar.ValueTypeName = Grammar.DefaultValueTypeName;
-				Console.WriteLine("{0}{1} struct {2}", 
+                Console.WriteLine("[StructLayout(LayoutKind.Explicit)]");
+				Console.WriteLine("{0}{1} struct {2}",
                     grammar.Visibility, grammar.PartialMark, grammar.ValueTypeName);
 				InsertCodeSpan(grammar.unionType);
 			}
