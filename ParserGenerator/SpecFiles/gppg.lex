@@ -154,13 +154,18 @@ OneLineCmnt  \/\/{DotChr}*
                                   return (int)kWord;
                               }
                             }
-                                                        
+
+"FieldOffset"               { return (int)Token.fieldOffset; }
+
 {Number}                    { yylval.iVal = ParseDecimal(yytext); return (int)Token.number; }
 {HexNumber}                 { yylval.iVal = ParseHexaDec(yytext); return (int)Token.number; }
 {Ident}                     { return (int)Token.ident; }
 {LitChr}                    { return (int)Token.litchar; }
 {LitStr}                    { return (int)Token.litstring; }                           
 {OpChars}                   { return (int)(yytext[0]); } 
+
+"("                         { return (int)'('; }
+")"                         { return (int)')'; }
 
 /* Rules for scanning filenames */
 <GetPath>{

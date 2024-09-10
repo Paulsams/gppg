@@ -23,6 +23,7 @@
          public ActionProxy proxy;
        }
 
+%token fieldOffset "FieldOffset"
 %token codeStart codeEnd ident anchoredSymbol 
 %token <iVal> number 
 %token filePath litstring verbatim litchar
@@ -253,7 +254,7 @@ DeclList
     ;
     
 OneDecl
-    : TypeConstructorSeq ident ';'
+    : '[' fieldOffset '(' number ')' ']' TypeConstructorSeq ident ';'
     ;
     
 TypeConstructorSeq
